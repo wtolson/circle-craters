@@ -48,7 +48,12 @@ class ExportDialog(QtGui.QDialog, ExportDialogBase):
         self.filename_choose_button.clicked.connect(self.choose_file)
 
     def choose_file(self):
-        self.filename_input.setText(QtGui.QFileDialog.getSaveFileName())
+        filename = QtGui.QFileDialog.getSaveFileName(
+            parent=self,
+            directory=self.filename_input.text(),
+            filter="Diam file (*.diam)",
+        )
+        self.filename_input.setText(filename)
 
     def show(self, choices):
         if not choices:
